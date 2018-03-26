@@ -38,7 +38,7 @@ def get_set_config (filein):
 	for i in range(len(l)):
 		elem = l[i]
 		if (not elem.startswith('##')) and (not elem.startswith('/*')):
-			clean_elem = elem.strip('\n\r{ ')
+			clean_elem = elem.strip('\t\n\r{ ')
 			if ("inactive" in clean_elem):
 				clean_elem = clean_elem.replace("inactive: ","")
 				linactive = list(lres)
