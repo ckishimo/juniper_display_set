@@ -20,6 +20,7 @@ import sys
 def print_set_command (lcommands, leaf):
 	c = ' '
 	c = c.join(lcommands)
+	secret = ""
 	print("%s %s" % (c, leaf))
 	return
 
@@ -33,6 +34,7 @@ def get_set_config (filein):
 	data = f.read()
 	f.close()
 
+	secret = ""
 	l = data.split('\n')
 	lres = ['set']
 	for i in range(len(l)):
@@ -50,7 +52,10 @@ def get_set_config (filein):
 				lprotect[0] = "protect"
 				print_set_command(lprotect, clean_elem)
 			if ';' in clean_elem:		# this is a leaf
-				print_set_command(lres, clean_elem.split(";")[0])
+				last_elem = clean_elem.split(";")[0]
+				#if "encrypted-password" in clean_elem:
+				#	last_elem += " ## SECRET-DATA"
+				print_set_command(lres, last_elem)
 			elif clean_elem == '}':		# Up one level remove parent
 				lres.pop()
 			else:				
