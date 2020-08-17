@@ -20,14 +20,14 @@ import sys
 def print_set_command (lcommands, leaf):
 	c = ' '
 	c = c.join(lcommands)
-	print("%s %s" % (c, leaf))
+	print(("%s %s" % (c, leaf)))
 	return
 
 def get_set_config (filein):
 	try:
 		f = open(filein, 'r')
 	except IOError:
-		print "Error: could not read input file:", filein
+		print("Error: could not read input file:", filein)
 		sys.exit()
 
 	data = f.read()
@@ -57,7 +57,7 @@ def get_set_config (filein):
 				lres.append(clean_elem)
 
 if len(sys.argv) != 2:
-	print "Usage: %s FILEIN\n" % sys.argv[0] 
+	print("Usage: %s FILEIN\n" % sys.argv[0])
 else:
 	get_set_config(sys.argv[1])
 
