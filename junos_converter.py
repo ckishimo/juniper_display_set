@@ -35,10 +35,9 @@ def get_set_config(filein):
     data = f.read()
     f.close()
 
-    line = data.split("\n")
+    lines = data.split("\n")
     lres = ["set"]
-    for i in range(len(line)):
-        elem = line[i]
+    for elem in lines:
         if (not elem.startswith("#")) and (not elem.startswith("/*")):
             clean_elem = elem.strip("\t\n\r{ ")
             if "inactive" in clean_elem:
