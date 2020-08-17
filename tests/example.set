@@ -1,9 +1,9 @@
 set version 14.1R1.10
 set system host-name myrouter
-set system root-authentication encrypted-password "$11111$VrloaKaj0$OwnE4.pHqnEGigmuLZQkZ/"
+set system root-authentication encrypted-password "$VrloaKaj0$OwnE4.pHqnEGigmuLZQkZ/"
 set system login user ckishimo uid 2000
 set system login user ckishimo class super-user
-set system login user ckishimo authentication encrypted-password "$1$YJ7i717qVpo8$myuAjTW/tkWlm6EudqcL4/"
+set system login user ckishimo authentication encrypted-password "$J7i717qVpo8$myuAjTW/tkWlm6EudqcL4/"
 set system services ftp
 set system services ssh
 set system services telnet
