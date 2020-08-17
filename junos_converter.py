@@ -39,6 +39,8 @@ def get_set_config(filein):
     lines = data.split("\n")
     lres = ["set"]
     for elem in lines:
+        if elem is '':
+            continue
         if (not elem.startswith("#")) and (not elem.startswith("/*")):
             clean_elem = elem.strip("\t\n\r{ ")
             # is there a pending annotation
