@@ -1,0 +1,13 @@
+set version 20200609.165031.6_builder.r1115480
+edit 
+annotate system "this is the system config"
+top 
+set system host-name Juniper-WH0218170175
+set system root-authentication encrypted-password "$6$GZpb32KJ$bs.uT/kWZBMG7PzjjK2z/LXIad4SuTPw4p63/7b9QcmcBU4TuGxvS4xg2vywBM5St8BM0iqlbbbgeJCBawpoa."
+edit system 
+annotate scripts "my scripts"
+top 
+deactivate system scripts commit
+set system scripts commit file commit_diff.py optional
+set system scripts commit file commit_diff.py checksum sha-256 13fa60f978423e88f87f086db32a3c387db979dce690eb74cddbdc799ca72f7b
+
