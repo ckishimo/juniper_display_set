@@ -3,6 +3,7 @@ import sys
 import os
 from junos_converter import get_set_config
 
+
 def test_junos_converter(capsys):
     """Test conversion of Junos curly config to list of set commands."""
     directory = "tests/"
@@ -17,10 +18,9 @@ def test_junos_converter(capsys):
         # sys.stdout.write(out)
 
         # Convert unicode to str and remove the last carriage return
-        lout = map(str, out.split('\n'))[:-1]
+        lout = map(str, out.split("\n"))[:-1]
 
         result = file.replace(".conf", ".set")
         with open(directory + result, "r") as fexp:
             expected = [x.strip() for x in fexp.readlines()]
             assert sorted(lout) == sorted(expected)
-
