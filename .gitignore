@@ -1,0 +1,12 @@
+# Ignore local virtualenvs
+lib/
+bin/
+include/
+.Python/
+
+.cache/
+log_*
+env
+kk*
+__pycache*
+*.pyc
