@@ -36,10 +36,9 @@ def get_set_config(filein):
     f.close()
 
     annotation = ""
-    line = data.split("\n")
+    lines = data.split("\n")
     lres = ["set"]
-    for i in range(len(line)):
-        elem = line[i].strip()
+    for elem in lines:
         if (not elem.startswith("#")) and (not elem.startswith("/*")):
             clean_elem = elem.strip("\t\n\r{ ")
             # is there a pending annotation
