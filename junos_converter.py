@@ -39,6 +39,8 @@ def get_set_config(filein):
     lines = data.split("\n")
     lres = ["set"]
     for elem in lines:
+        if elem is '':
+            continue
         if (not elem.startswith("#")) and (not elem.startswith("/*")):
             clean_elem = elem.strip("\t\n\r{ ")
             # is there a pending annotation
@@ -47,7 +49,6 @@ def get_set_config(filein):
                 tmp.append(clean_elem)
                 # Need edit to the current level
                 level = lres[:]
-                print(level)
                 if len(level) > 1:
                     level[0] = "edit"
                     print_set_command(level, "")
