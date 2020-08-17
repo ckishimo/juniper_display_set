@@ -18,7 +18,7 @@ def test_junos_converter(capsys):
         # sys.stdout.write(out)
 
         # Convert unicode to str and remove the last carriage return
-        lout = map(str, out.split("\n"))[:-1]
+        lout = list(map(str, out.split("\n")))[:-1]
 
         result = file.replace(".conf", ".set")
         with open(directory + result, "r") as fexp:
