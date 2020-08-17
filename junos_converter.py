@@ -4,8 +4,8 @@
 # Copyright (c) 2017 carles.kishimoto@gmail.com
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
-# use this file except in compliance with the License.  You may obtain a copy of
-# the License at
+# use this file except in compliance with the License.  You may obtain a copy
+# of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
@@ -35,10 +35,10 @@ def get_set_config(filein):
     data = f.read()
     f.close()
 
-    l = data.split("\n")
+    line = data.split("\n")
     lres = ["set"]
-    for i in range(len(l)):
-        elem = l[i]
+    for i in range(len(line)):
+        elem = line[i]
         if (not elem.startswith("#")) and (not elem.startswith("/*")):
             clean_elem = elem.strip("\t\n\r{ ")
             if "inactive" in clean_elem:

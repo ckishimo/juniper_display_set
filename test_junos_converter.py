@@ -1,5 +1,3 @@
-import pytest
-import sys
 import os
 from junos_converter import get_set_config
 
