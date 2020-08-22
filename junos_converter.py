@@ -50,7 +50,10 @@ def get_set_config(filein):
             # Is there a pending annotation
             if annotation:
                 if len(lres) > 1:
-                    lannotations.append("top edit %s" % " ".join(lres[:]))
+                    level = lres[:]
+                    # Replace "set" with "edit"
+                    level[0] = "edit"
+                    lannotations.append("top %s" % " ".join(level))
                 lannotations.append("annotate %s %s" % (clean_elem, annotation))
                 annotation = ""
             if "inactive" in clean_elem:
