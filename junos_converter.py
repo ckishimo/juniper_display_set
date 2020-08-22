@@ -35,25 +35,23 @@ def get_set_config(filein):
     data = f.read()
     f.close()
 
+    # Keep a list of annotations to be printed at the end
+    lannotations = []
     annotation = ""
     lines = data.split("\n")
     lres = ["set"]
     for elem in lines:
+        elem = elem.strip()
         if elem is '':
             continue
         if (not elem.startswith("#")) and (not elem.startswith("/*")):
             clean_elem = elem.strip("\t\n\r{ ")
-            # is there a pending annotation
+
+            # Is there a pending annotation
             if annotation:
-                tmp = ["annotate"]
-                tmp.append(clean_elem)
-                # Need edit to the current level
-                level = lres[:]
-                if len(level) > 1:
-                    level[0] = "edit"
-                    print_set_command(level, "")
-                print_set_command(tmp, annotation)
-                print("top ", end="")
+                if len(lres) > 1:
+                    lannotations.append("top edit %s" % " ".join(lres[:]))
+                lannotations.append("annotate %s %s" % (clean_elem, annotation))
                 annotation = ""
             if "inactive" in clean_elem:
                 clean_elem = clean_elem.replace("inactive: ", "")
@@ -76,6 +74,10 @@ def get_set_config(filein):
             if elem.startswith('/*'):
                 annotation = elem.replace('/* ', "\"")
                 annotation = annotation.replace(' */', "\"")
+
+    # Print all annotations at the end
+    for a in lannotations:
+        print(a)
 
 if len(sys.argv) != 2:
     print("Usage: %s FILEIN\n" % sys.argv[0])
