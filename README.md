@@ -77,6 +77,8 @@ set system syslog file messages authorization info
 set system syslog file interactive-commands interactive-commands any
 set interfaces ge-0/0/1 vlan-tagging
 set interfaces ge-0/0/2 vlan-tagging
+top
+annotate version "my configuration"
 ```
 
 Or you can upload the output file to the Juniper device and use the 'load merge' command 
@@ -96,7 +98,8 @@ $ cl_napalm_configure --strategy merge --user ckishimo --vendor junos 10.1.1.1 e
 
 Notes
 -----
-- Annotations will be lost (like /* my configuration */)
+- Annotations are supported. All annotations will be listed at the end
+   - Note "annotations" are not supported by Junos (ie: they will be lost when `show | display set`)
 - Inactive blocks are supported (like "system syslog" in the example)
 - Protect blocks are supported as well (like "system services" in the example)
 
