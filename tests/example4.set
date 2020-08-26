@@ -4,6 +4,8 @@ set system root-authentication encrypted-password "$6$GZpb32KJ$bs.uT/kWZBMG7Pzjj
 deactivate system scripts commit
 set system scripts commit file commit_diff.py optional
 set system scripts commit file commit_diff.py checksum sha-256 13fa60f978423e88f87f086db32a3c387db979dce690eb74cddbdc799ca72f7b
+top
 annotate system "this is the system config"
-top edit system 
+top
+edit system
 annotate scripts "my scripts"

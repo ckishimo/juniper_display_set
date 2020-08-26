@@ -67,4 +67,5 @@ set protocols lldp-med interface all
 set protocols igmp-snooping vlan default
 set vlans default vlan-id 1
 set vlans default l3-interface irb.0
+top
 annotate system "this is the system config"

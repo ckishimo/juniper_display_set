@@ -7,17 +7,21 @@ set system scripts commit file commit_diff.py checksum sha-256 13fa60f978423e88f
 set system scripts commit file commit_comment.slax optional
 set system scripts op file brief_report_op.py description "Provides a status report of the device"
 set system scripts op file brief_report_op.py checksum sha-256 61e210cf29796fb8155050978289cde2ccc93f9e95f19e45a56534f268d07c0a
-set protocols lldp port-id-subtype interface-name
-set protocols lldp interface all
-set protocols lldp-med interface all
-set protocols igmp-snooping vlan default
-set vlans default vlan-id 1
-set vlans default l3-interface irb.0
+set protocols lldp port-id-subtype interface all
+set protocols lldp lldp-med interface all
+set protocols lldp igmp-snooping vlan default
+set protocols vlans default vlan-id 1
+set protocols vlans default l3-interface irb.0
+top
 annotate system "this is the system config"
-top edit system
+top
+edit system
 annotate scripts "my scripts"
+top
 annotate protocols "protocols to be configured"
-top edit protocols
+top
+edit protocols
 annotate lldp "for neighbor discovery"
-top edit protocols lldp
-annotate port-id-subtype interface-name; "need iface name not snmp index"
+top
+edit protocols lldp
+annotate port-id-subtype "need iface name not snmp index"
