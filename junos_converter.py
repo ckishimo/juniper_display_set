@@ -21,6 +21,7 @@ import sys
 def print_set_command(lcommands, leaf):
     print(("%s %s" % (" ".join(lcommands), leaf)))
 
+
 def get_set_config(filein):
     try:
         with open(filein, 'r') as f:
@@ -29,6 +30,8 @@ def get_set_config(filein):
         print("Error: Could not read input file:", filein)
         exit()
 
+    # Add \n for one-line configs
+    data = data.replace("{", "{\n").replace("}", "\n}")
     # Keep a list of annotations to be printed at the end
     lannotations = []
     annotation = ""
