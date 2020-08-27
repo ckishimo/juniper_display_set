@@ -1,0 +1,3 @@
+set event-options generate-event ztp-registration time-interval 60
+set event-options policy ztp-registration events ztp-registration
+set event-options policy ztp-registration then execute-commands commands "op url http://10.5.5.1/ztp-registration.slax output syslog"
