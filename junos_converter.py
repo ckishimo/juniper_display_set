@@ -32,14 +32,16 @@ def get_set_config(filein):
     # Keep a list of annotations to be printed at the end
     lannotations = []
     annotation = ""
-
-    lines = data.split("\n")
     lres = ["set"]
-    for elem in lines:
+    for elem in data.split("\n"):
         elem = elem.strip()
-        if elem == "":
+        if elem == "" or elem.startswith("#"):
             continue
-        if (not elem.startswith("#")) and (not elem.startswith("/*")):
+
+        if elem.startswith("/*"):
+            # Store current annotation
+            annotation = elem.replace("/* ", '"').replace(" */", '"')
+        else:
             clean_elem = elem.strip("\t\n\r{ ")
             if annotation:
                 lannotations.append("top")
@@ -69,11 +71,6 @@ def get_set_config(filein):
                 lres.pop()
             else:
                 lres.append(clean_elem)
-        else:
-            # keep current annotation
-            if elem.startswith("/*"):
-                annotation = elem.replace("/* ", '"')
-                annotation = annotation.replace(" */", '"')
 
     # Print all annotations at the end
     for a in lannotations:
