@@ -19,8 +19,7 @@ import sys
 
 
 def print_set_command(lcommands, leaf):
-    c = " ".join(lcommands)
-    print(("%s %s" % (c, leaf)))
+    print(("%s %s" % (" ".join(lcommands), leaf)))
 
 
 def get_set_config(filein):
