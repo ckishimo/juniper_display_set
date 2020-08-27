@@ -41,7 +41,7 @@ def get_set_config(filein):
     lres = ["set"]
     for elem in lines:
         elem = elem.strip()
-        if elem is "":
+        if elem == "":
             continue
         if (not elem.startswith("#")) and (not elem.startswith("/*")):
             clean_elem = elem.strip("\t\n\r{ ")
