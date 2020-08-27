@@ -21,16 +21,13 @@ import sys
 def print_set_command(lcommands, leaf):
     print(("%s %s" % (" ".join(lcommands), leaf)))
 
-
 def get_set_config(filein):
     try:
-        f = open(filein, "r")
+        with open(filein, 'r') as f:
+            data = f.read()
     except IOError:
-        print("Error: could not read input file:", filein)
-        sys.exit()
-
-    data = f.read()
-    f.close()
+        print("Error: Could not read input file:", filein)
+        exit()
 
     # Keep a list of annotations to be printed at the end
     lannotations = []
