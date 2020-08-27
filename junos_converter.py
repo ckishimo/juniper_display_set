@@ -15,14 +15,13 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-import sys
-
+import argparse
 
 def print_set_command(lcommands, leaf):
     print(("%s %s" % (" ".join(lcommands), leaf)))
 
 
-def get_set_config(filein):
+def get_set_config(filein, ignore_annotations):
     try:
         with open(filein, 'r') as f:
             data = f.read()
@@ -75,12 +74,27 @@ def get_set_config(filein):
             else:
                 lres.append(clean_elem)
 
-    # Print all annotations at the end
-    for a in lannotations:
-        print(a)
+    if not ignore_annotations:
+        # Print all annotations at the end
+        for a in lannotations:
+            print(a)
 
 
-if len(sys.argv) != 2:
-    print("Usage: %s FILEIN\n" % sys.argv[0])
-else:
-    get_set_config(sys.argv[1])
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=">>> Juniper display set")
+    parser.add_argument(
+        "--ignore-annotations",
+        required=False,
+        default=False,
+        action='store_true',
+        help="Specify if annotations should be removed from the output",
+    )
+    parser.add_argument(
+        "--input",
+        required=True,
+        type=str,
+        help="Specify the input Junos configuration file",
+    )
+    args = parser.parse_args()
+
+    get_set_config(args.input, args.ignore_annotations)
