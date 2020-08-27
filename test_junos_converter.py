@@ -9,7 +9,7 @@ def test_junos_converter(capsys):
     test_files = filter(lambda x: ".set" not in x, os.listdir(directory))
     for file in test_files:
 
-        get_set_config(directory + file)
+        get_set_config(directory + file, False)
         out, err = capsys.readouterr()
 
         # Make the output visible in the pytest report
