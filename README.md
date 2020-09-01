@@ -89,7 +89,7 @@ Or you can upload the output file to the Juniper device and use the 'load merge'
 
 ```
 $ python junos_converter.py --input example.conf > example.set
-$ scp example.set ....
+$ scp example.set ckishimo@10.1.1.1:
 
 [edit]
 ckishimo@juniper-mx# load merge example.set    
