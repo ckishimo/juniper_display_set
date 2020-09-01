@@ -58,7 +58,11 @@ interfaces {
 The output will be a list of set commands you can paste into your router
 
 ```
-$ python junos-converter.py example.conf 
+$ $ python junos_converter.py
+usage: junos_converter.py [-h] [--ignore-annotations] --input INPUT
+junos_converter.py: error: the following arguments are required: --input
+
+$ python junos_converter.py --input example.conf
 set version 14.1R1.10
 set system host-name myrouter
 set system root-authentication encrypted-password "$11111$VrloaKaj0$OwnE4.pHqnEGigmuLZQkZ/"
@@ -84,7 +88,7 @@ annotate version "my configuration"
 Or you can upload the output file to the Juniper device and use the 'load merge' command 
 
 ```
-$ python junos-converter.py example.conf > example.set
+$ python junos_converter.py --input example.conf > example.set
 $ scp example.set ....
 
 [edit]
@@ -98,7 +102,7 @@ $ cl_napalm_configure --strategy merge --user ckishimo --vendor junos 10.1.1.1 e
 
 Notes
 -----
-- Annotations are supported. All annotations will be listed at the end
+- Annotations are supported. They will be listed at the end
    - Note "annotations" are not supported by Junos (ie: they will be lost when `show | display set`)
 - Inactive blocks are supported (like "system syslog" in the example)
 - Protect blocks are supported as well (like "system services" in the example)
