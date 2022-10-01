@@ -17,20 +17,37 @@
 
 import argparse
 
+
 def print_set_command(lcommands, leaf):
     print(("%s %s" % (" ".join(lcommands), leaf)))
 
 
+def replace_curly(s):
+    return s.replace("{", "{\n").replace("}", "\n}")
+
+
 def get_set_config(filein, ignore_annotations):
     try:
-        with open(filein, 'r') as f:
+        with open(filein, "r") as f:
             data = f.read()
     except IOError:
         print("Error: Could not read input file:", filein)
         exit()
 
     # Add \n for one-line configs
-    data = data.replace("{", "{\n").replace("}", "\n}")
+    if not '"' in data:
+        data = replace_curly(data)
+    else:
+        # Do not replace curly brackets if within double quotes
+        # curly brackets can show up in as-path expressions
+        # Assume an even number of double quotes
+        data = '"'.join(
+            [
+                item if i % 2 != 0 else replace_curly(item)
+                for i, item in enumerate(data.split('"'))
+            ]
+        )
+
     # Keep a list of annotations to be printed at the end
     lannotations = []
     annotation = ""
@@ -86,7 +103,7 @@ if __name__ == "__main__":
         "--ignore-annotations",
         required=False,
         default=False,
-        action='store_true',
+        action="store_true",
         help="Specify if annotations should be removed from the output",
     )
     parser.add_argument(
