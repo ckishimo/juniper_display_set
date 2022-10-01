@@ -1,0 +1,6 @@
+set policy-options policy-statement Export-Directs term Loopback-Interface from protocol direct
+set policy-options policy-statement Export-Directs term Loopback-Interface from route-filter 192.168.100.0/24 orlonger
+set policy-options policy-statement Export-Directs term Loopback-Interface then accept
+set policy-options policy-statement ecmp term 1 then load-balance per-packet
+set policy-options policy-statement load-balance term term10 then load-balance per-packet
+set policy-options as-path test "^123 456{2,} 123 456{3,}"
