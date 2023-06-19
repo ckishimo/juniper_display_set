@@ -26,6 +26,52 @@ def replace_curly(s):
     return s.replace("{", "{\n").replace("}", "\n}")
 
 
+def vlan_members_to_leaves(data):
+    new_data = []
+    in_members_array = False
+    for line in data.splitlines():
+        if line.strip().startswith("members ["):
+            in_members_array = True
+
+        if in_members_array:
+            if "];" in line:
+                in_members_array = False
+            new_leaves_update(line, new_data)
+
+        else:
+            new_data.append(line)
+    return "\n".join(new_data)
+
+
+def new_leaves_update(line, new_data):
+    chunks = line.split()
+    for chunk in chunks:
+        if chunks[0] == "members ":
+            startwhites = line[: len(line) - len(line.lstrip())]
+            new_data.append(f"{startwhites}{chunks[0]} {chunk};")
+        elif chunk in ["];", "]", "[", "members"]:
+            continue
+        else:
+            startwhites = line[: len(line) - len(line.lstrip())]
+            new_data.append(f"{startwhites}members {chunk};")
+
+
+def new_leaf_line(line):
+    chunks = line.split()
+    for chunk in chunks:
+        if chunks[0] == "members ":
+            startwhites = line[: len(line) - len(line.lstrip())]
+            line = f"{startwhites}{chunks[0]} {chunk};"
+        elif chunk in ["];", "]", "[", "members"]:
+            continue
+        else:
+            startwhites = line[: len(line) - len(line.lstrip())]
+            line = f"{startwhites}members {chunk};"
+
+    in_members_array = False if "];" in line else True
+    return in_members_array, line
+
+
 def get_set_config(filein, ignore_annotations):
     try:
         with open(filein, "r") as f:
@@ -34,6 +80,7 @@ def get_set_config(filein, ignore_annotations):
         print("Error: Could not read input file:", filein)
         exit()
 
+    data = vlan_members_to_leaves(data)
     # Add \n for one-line configs
     if not '"' in data:
         data = replace_curly(data)
