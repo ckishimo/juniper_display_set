@@ -70,9 +70,11 @@ def get_set_config(filein, ignore_annotations):
                     level[0] = "edit"
                     lannotations.append("%s" % " ".join(level))
                 # Annotation in a leaf, keep only the keyword
+                clean_elem_orig = clean_elem
                 if ";" in clean_elem:
                     clean_elem = clean_elem.split()[0]
                 lannotations.append("annotate %s %s" % (clean_elem, annotation))
+                clean_elem = clean_elem_orig
                 annotation = ""
             if "inactive" in clean_elem:
                 clean_elem = clean_elem.replace("inactive: ", "")
